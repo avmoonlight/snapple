@@ -27,3 +27,7 @@ relogio = pygame.time.Clock()
 def desenhar_cobrinha(cobrinha):
     for bloco in cobrinha:
         pygame.draw.rect(tela, VERDE, (*bloco, TAMANHO_BLOCO, TAMANHO_BLOCO), border_radius=6)
+
+def mostrar_pontuacao(pontos):
+    texto = fonte.render(f"Pontos: {pontos}", True, BRANCO)
+    tela.blit(texto, (10, 10))
