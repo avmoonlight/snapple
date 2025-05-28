@@ -15,15 +15,15 @@ Para instalar o Pygame, abra o terminal e digite:
 ```bash
 pip install pygame
 ```
-
 ---
 
 ## Como iniciar o jogo
 
 1. Baixe os arquivos do projeto (principalmente o `snake.py`)
 2. Execute o arquivo com:
-
-
+```bash
+python snake.py
+```
 3. O jogo abrirá com uma tela inicial e um botão "JOGAR"
 4. Clique no botão para começar!
 
