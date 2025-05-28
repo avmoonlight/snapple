@@ -31,3 +31,26 @@ def desenhar_cobrinha(cobrinha):
 def mostrar_pontuacao(pontos):
     texto = fonte.render(f"Pontos: {pontos}", True, BRANCO)
     tela.blit(texto, (10, 10))
+
+def tela_inicial():
+    while True:
+        tela.fill(CINZA_ESCURO)
+
+        titulo = fonte_titulo.render("Snake Estilizado", True, VERDE)
+        tela.blit(titulo, (LARGURA // 2 - titulo.get_width() // 2, 100))
+
+        # Botão
+        botao = pygame.Rect(LARGURA // 2 - 100, ALTURA // 2 - 30, 200, 60)
+        pygame.draw.rect(tela, AZUL, botao, border_radius=12)
+        texto_botao = fonte.render("JOGAR", True, BRANCO)
+        tela.blit(texto_botao, (botao.x + 50, botao.y + 10))
+
+        pygame.display.update()
+
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                pygame.quit()
+                sys.exit()
+            elif evento.type == pygame.MOUSEBUTTONDOWN:
+                if botao.collidepoint(evento.pos):
+                    return  # Sai da tela inicial e inicia o jogo
