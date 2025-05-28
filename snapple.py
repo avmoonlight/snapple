@@ -23,3 +23,7 @@ fonte_titulo = pygame.font.SysFont("comicsansms", 48, bold=True)
 tela = pygame.display.set_mode((LARGURA, ALTURA))
 pygame.display.set_caption("Snapple")
 relogio = pygame.time.Clock()
+
+def desenhar_cobrinha(cobrinha):
+    for bloco in cobrinha:
+        pygame.draw.rect(tela, VERDE, (*bloco, TAMANHO_BLOCO, TAMANHO_BLOCO), border_radius=6)
