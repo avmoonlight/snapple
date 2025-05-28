@@ -16,3 +16,6 @@ CINZA_ESCURO = (30, 30, 30)
 LARGURA = 600
 ALTURA = 600
 TAMANHO_BLOCO = 20
+
+fonte = pygame.font.SysFont("comicsansms", 32)
+fonte_titulo = pygame.font.SysFont("comicsansms", 48, bold=True)
