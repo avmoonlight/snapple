@@ -68,4 +68,4 @@ Você pode modificá-lo, adicionar sons, efeitos ou novos modos de jogo!
 
 ---
 
-Divirta-se jogando o 🐍 **Snapple**!
+Divirta-se jogando o **Snapple**!
