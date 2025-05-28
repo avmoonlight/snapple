@@ -54,3 +54,68 @@ def tela_inicial():
             elif evento.type == pygame.MOUSEBUTTONDOWN:
                 if botao.collidepoint(evento.pos):
                     return  # Sai da tela inicial e inicia o jogo
+
+def jogo():
+    x = LARGURA // 2
+    y = ALTURA // 2
+    dx = TAMANHO_BLOCO  # começa andando para direita
+    dy = 0
+    cobrinha = []
+    comprimento = 3
+
+    fruta_x = random.randrange(0, LARGURA, TAMANHO_BLOCO)
+    fruta_y = random.randrange(0, ALTURA, TAMANHO_BLOCO)
+
+    rodando = True
+    pontos = 0
+
+    while rodando:
+        tela.fill(CINZA)
+
+        # Eventos
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                rodando = False
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_UP and dy == 0:
+                    dx, dy = 0, -TAMANHO_BLOCO
+                elif evento.key == pygame.K_DOWN and dy == 0:
+                    dx, dy = 0, TAMANHO_BLOCO
+                elif evento.key == pygame.K_LEFT and dx == 0:
+                    dx, dy = -TAMANHO_BLOCO, 0
+                elif evento.key == pygame.K_RIGHT and dx == 0:
+                    dx, dy = TAMANHO_BLOCO, 0
+
+        # Atualiza posição
+        x += dx
+        y += dy
+
+        # Colisão com bordas
+        if x < 0 or x >= LARGURA or y < 0 or y >= ALTURA:
+            break
+
+        # Atualiza corpo da cobrinha
+        cobrinha.append((x, y))
+        if len(cobrinha) > comprimento:
+            del cobrinha[0]
+
+        # Colisão com si mesma
+        if len(cobrinha) != len(set(cobrinha)):
+            break
+
+        # Colisão com fruta
+        if x == fruta_x and y == fruta_y:
+            fruta_x = random.randrange(0, LARGURA, TAMANHO_BLOCO)
+            fruta_y = random.randrange(0, ALTURA, TAMANHO_BLOCO)
+            comprimento += 1
+            pontos += 1
+
+        # Desenha elementos
+        pygame.draw.rect(tela, VERMELHO, (fruta_x, fruta_y, TAMANHO_BLOCO, TAMANHO_BLOCO), border_radius=8)
+        desenhar_cobrinha(cobrinha)
+        mostrar_pontuacao(pontos)
+
+        pygame.display.update()
+
+        # Ajuste de velocidade com limite máximo
+        relogio.tick(min(6 + pontos // 3, 20))
