@@ -125,7 +125,7 @@ def jogo():
     tela.blit(texto_game_over, (LARGURA // 2 - texto_game_over.get_width() // 2, ALTURA // 2 - 20))
     pygame.display.update()
 
-    pygame.time.delay(1000)  # Delay para o jogador ver o "Game Over"
+    pygame.time.delay(1000)  
 
     esperando = True
     while esperando:
