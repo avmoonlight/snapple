@@ -5,7 +5,7 @@ Divertido, simples de jogar, e com visual bonito!
 
 ---
 
-## ✅ O que você precisa
+## O que você precisa
 
 - Python instalado no computador
 - Biblioteca **Pygame**
@@ -18,7 +18,7 @@ pip install pygame
 
 ---
 
-## 🚀 Como iniciar o jogo
+## Como iniciar o jogo
 
 1. Baixe os arquivos do projeto (principalmente o `snake.py`)
 2. Execute o arquivo com:
@@ -29,7 +29,7 @@ pip install pygame
 
 ---
 
-## 🎮 Como jogar
+## Como jogar
 
 - Use as **setas do teclado** para controlar a cobrinha:
   - ↑ Cima
@@ -44,7 +44,7 @@ pip install pygame
 
 ---
 
-## 🕹️ Controles extras
+## Controles extras
 
 - Após perder:
   - Pressione **R** para recomeçar
@@ -52,7 +52,7 @@ pip install pygame
 
 ---
 
-## ✨ Recursos do jogo
+## Recursos do jogo
 
 - Estilo moderno com botões arredondados e cores vivas
 - Tela inicial com botão de início
@@ -61,7 +61,7 @@ pip install pygame
 
 ---
 
-## 📌 Observação
+## Observação
 
 Este jogo foi feito para aprendizado e diversão.  
 Você pode modificá-lo, adicionar sons, efeitos ou novos modos de jogo!
