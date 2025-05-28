@@ -119,3 +119,24 @@ def jogo():
 
         # Ajuste de velocidade com limite máximo
         relogio.tick(min(6 + pontos // 3, 20))
+
+    tela.fill(PRETO)
+    texto_game_over = fonte.render("Game Over!", True, BRANCO)
+    tela.blit(texto_game_over, (LARGURA // 2 - texto_game_over.get_width() // 2, ALTURA // 2 - 20))
+    pygame.display.update()
+
+    pygame.time.delay(1000)  # Delay para o jogador ver o "Game Over"
+
+    esperando = True
+    while esperando:
+        for evento in pygame.event.get():
+            if evento.type == pygame.QUIT:
+                esperando = False
+            elif evento.type == pygame.KEYDOWN:
+                if evento.key == pygame.K_q:
+                    esperando = False
+                elif evento.key == pygame.K_r:
+                    jogo()
+                    return
+    pygame.quit()
+    sys.exit()
