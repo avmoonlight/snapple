@@ -19,3 +19,7 @@ TAMANHO_BLOCO = 20
 
 fonte = pygame.font.SysFont("comicsansms", 32)
 fonte_titulo = pygame.font.SysFont("comicsansms", 48, bold=True)
+
+tela = pygame.display.set_mode((LARGURA, ALTURA))
+pygame.display.set_caption("Snapple")
+relogio = pygame.time.Clock()
