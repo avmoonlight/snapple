@@ -1,4 +1,4 @@
-# Snake Estilizado
+# Snapple
 
 Este é um jogo da cobrinha moderno e estilizado feito com **Python** e **Pygame**.  
 Divertido, simples de jogar, e com visual bonito!
