@@ -117,6 +117,8 @@ def jogo():
         texto_game_over = fonte.render("Game Over!", True, BRANCO)
         tela.blit(texto_game_over, (LARGURA // 2 - texto_game_over.get_width() // 2, ALTURA // 2 - 80))
 
+        mostrar_pontuacao(pontos)
+
         botao_restart = pygame.Rect(LARGURA // 2 - 100, ALTURA // 2 - 10, 200, 60)
         pygame.draw.rect(tela, AZUL, botao_restart, border_radius=12)
         texto_restart = fonte.render("REINICIAR", True, BRANCO)
