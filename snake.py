@@ -53,12 +53,12 @@ def tela_inicial():
                 sys.exit()
             elif evento.type == pygame.MOUSEBUTTONDOWN:
                 if botao.collidepoint(evento.pos):
-                    return  # Sai da tela inicial e inicia o jogo
+                    return
 
 def jogo():
     x = LARGURA // 2
     y = ALTURA // 2
-    dx = TAMANHO_BLOCO  # começa andando para direita
+    dx = TAMANHO_BLOCO
     dy = 0
     cobrinha = []
     comprimento = 3
@@ -72,74 +72,77 @@ def jogo():
     while rodando:
         tela.fill(CINZA)
 
-        # Eventos
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
             elif evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_UP and dy == 0:
+                if (evento.key == pygame.K_UP or evento.key == pygame.K_w) and dy == 0:
                     dx, dy = 0, -TAMANHO_BLOCO
-                elif evento.key == pygame.K_DOWN and dy == 0:
+                elif (evento.key == pygame.K_DOWN or evento.key == pygame.K_s) and dy == 0:
                     dx, dy = 0, TAMANHO_BLOCO
-                elif evento.key == pygame.K_LEFT and dx == 0:
+                elif (evento.key == pygame.K_LEFT or evento.key == pygame.K_a) and dx == 0:
                     dx, dy = -TAMANHO_BLOCO, 0
-                elif evento.key == pygame.K_RIGHT and dx == 0:
+                elif (evento.key == pygame.K_RIGHT or evento.key == pygame.K_d) and dx == 0:
                     dx, dy = TAMANHO_BLOCO, 0
 
-        # Atualiza posição
         x += dx
         y += dy
 
-        # Colisão com bordas
         if x < 0 or x >= LARGURA or y < 0 or y >= ALTURA:
             break
 
-        # Atualiza corpo da cobrinha
         cobrinha.append((x, y))
         if len(cobrinha) > comprimento:
             del cobrinha[0]
 
-        # Colisão com si mesma
         if len(cobrinha) != len(set(cobrinha)):
             break
 
-        # Colisão com fruta
         if x == fruta_x and y == fruta_y:
             fruta_x = random.randrange(0, LARGURA, TAMANHO_BLOCO)
             fruta_y = random.randrange(0, ALTURA, TAMANHO_BLOCO)
             comprimento += 1
             pontos += 1
 
-        # Desenha elementos
         pygame.draw.rect(tela, VERMELHO, (fruta_x, fruta_y, TAMANHO_BLOCO, TAMANHO_BLOCO), border_radius=8)
         desenhar_cobrinha(cobrinha)
         mostrar_pontuacao(pontos)
 
         pygame.display.update()
-
-        # Ajuste de velocidade com limite máximo
         relogio.tick(min(6 + pontos // 3, 20))
 
-    tela.fill(PRETO)
-    texto_game_over = fonte.render("Game Over!", True, BRANCO)
-    tela.blit(texto_game_over, (LARGURA // 2 - texto_game_over.get_width() // 2, ALTURA // 2 - 20))
-    pygame.display.update()
+    while True:
+        tela.fill(PRETO)
 
-    pygame.time.delay(1000)  
+        texto_game_over = fonte.render("Game Over!", True, BRANCO)
+        tela.blit(texto_game_over, (LARGURA // 2 - texto_game_over.get_width() // 2, ALTURA // 2 - 80))
 
-    esperando = True
-    while esperando:
+        botao_restart = pygame.Rect(LARGURA // 2 - 100, ALTURA // 2 - 10, 200, 60)
+        pygame.draw.rect(tela, AZUL, botao_restart, border_radius=12)
+        texto_restart = fonte.render("REINICIAR", True, BRANCO)
+        tela.blit(texto_restart, (
+            botao_restart.x + botao_restart.width // 2 - texto_restart.get_width() // 2,
+            botao_restart.y + botao_restart.height // 2 - texto_restart.get_height() // 2
+        ))
+
+        botao_sair = pygame.Rect(LARGURA // 2 - 100, ALTURA // 2 + 70, 200, 60)
+        pygame.draw.rect(tela, VERMELHO, botao_sair, border_radius=12)
+        texto_sair = fonte.render("SAIR", True, BRANCO)
+        tela.blit(texto_sair, (botao_sair.x + 65, botao_sair.y + 10))
+
+        pygame.display.update()
+
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
-                esperando = False
-            elif evento.type == pygame.KEYDOWN:
-                if evento.key == pygame.K_q:
-                    esperando = False
-                elif evento.key == pygame.K_r:
+                pygame.quit()
+                sys.exit()
+            elif evento.type == pygame.MOUSEBUTTONDOWN:
+                if botao_restart.collidepoint(evento.pos):
                     jogo()
                     return
-    pygame.quit()
-    sys.exit()
+                elif botao_sair.collidepoint(evento.pos):
+                    pygame.quit()
+                    sys.exit()
 
 if __name__ == "__main__":
     tela_inicial()
