@@ -39,7 +39,6 @@ def tela_inicial():
         titulo = fonte_titulo.render("Snapple", True, VERDE)
         tela.blit(titulo, (LARGURA // 2 - titulo.get_width() // 2, 100))
 
-        # Botão
         botao = pygame.Rect(LARGURA // 2 - 100, ALTURA // 2 - 30, 200, 60)
         pygame.draw.rect(tela, AZUL, botao, border_radius=12)
         texto_botao = fonte.render("JOGAR", True, BRANCO)
@@ -72,18 +71,24 @@ def jogo():
     while rodando:
         tela.fill(CINZA)
 
+        direcao_alterada = False  # Impede múltiplas mudanças de direção no mesmo frame
+
         for evento in pygame.event.get():
             if evento.type == pygame.QUIT:
                 rodando = False
-            elif evento.type == pygame.KEYDOWN:
+            elif evento.type == pygame.KEYDOWN and not direcao_alterada:
                 if (evento.key == pygame.K_UP or evento.key == pygame.K_w) and dy == 0:
                     dx, dy = 0, -TAMANHO_BLOCO
+                    direcao_alterada = True
                 elif (evento.key == pygame.K_DOWN or evento.key == pygame.K_s) and dy == 0:
                     dx, dy = 0, TAMANHO_BLOCO
+                    direcao_alterada = True
                 elif (evento.key == pygame.K_LEFT or evento.key == pygame.K_a) and dx == 0:
                     dx, dy = -TAMANHO_BLOCO, 0
+                    direcao_alterada = True
                 elif (evento.key == pygame.K_RIGHT or evento.key == pygame.K_d) and dx == 0:
                     dx, dy = TAMANHO_BLOCO, 0
+                    direcao_alterada = True
 
         x += dx
         y += dy
