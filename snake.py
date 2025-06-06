@@ -36,7 +36,7 @@ def tela_inicial():
     while True:
         tela.fill(CINZA_ESCURO)
 
-        titulo = fonte_titulo.render("Snake Estilizado", True, VERDE)
+        titulo = fonte_titulo.render("Snapple", True, VERDE)
         tela.blit(titulo, (LARGURA // 2 - titulo.get_width() // 2, 100))
 
         # Botão
